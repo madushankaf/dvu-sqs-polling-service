@@ -1,0 +1,1 @@
+dropins/org.apache.synapse.amazonsqs.poll.class-1.1.1.jar filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="readSQS" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <property expression="json-eval($)" name="messageBody" scope="default" type="STRING"/>
+    <payloadFactory media-type="json">
+        <format>
+                $1
+            </format>
+        <args>
+            <arg evaluator="xml" expression="$ctx:messageBody"/>
+        </args>
+    </payloadFactory>
+    <log level="full">
+        <property expression="$ctx:messageBody" name="payload"/>
+        <!--  <property expression="$ctx:messageBody" name="Received JSON"/>
+        <property expression="$ctx:receiptHandle" name="Received receiptHandle"/>  -->
+    </log>
+    <call>
+        <endpoint key="internal-data-service"/>
+    </call>
+</sequence>
